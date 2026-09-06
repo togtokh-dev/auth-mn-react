@@ -1,0 +1,26 @@
+# dependencies
+node_modules/
+
+# build output (npm publish үед `files: ["dist"]`-ээр орно, git-д хэрэггүй)
+dist/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# env
+.env
+.env.*
+!.env.example
+
+# editor / os
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# misc
+*.tgz
+.tsbuildinfo
