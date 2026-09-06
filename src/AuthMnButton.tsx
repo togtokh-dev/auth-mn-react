@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { AuthMnLogo } from "./logo";
+import { AuthMnLogo, ProviderIcon } from "./logo";
 import { ensureStyles } from "./styles";
 import { DEFAULT_AUTH_URL, LABELS, type AuthMnButtonProps } from "./types";
 
@@ -19,8 +19,10 @@ export function redirectToAuthMn(opts?: { authUrl?: string; redirectUrl?: string
 
 /**
  * "Sign in with Auth.mn" — redirect flow.
- * Дарахад auth.mn/login руу очиж, нэвтэрсний дараа redirectUrl?authToken=... буцна.
- * Token-ыг `useAuthMnCallback` hook-оор барина.
+ *   [лого] Auth.mn-ээр нэвтрэх | G f S
+ * Баруун талын жижиг лого нь Auth.mn-ээр Google/Facebook/Steam г.м. бүх
+ * 3rd party нэвтрэлт орж ирдгийг ойлгуулна (providers prop-оор солино, [] бол нуугдана).
+ * Нэвтэрсний дараа redirectUrl?authToken=... буцна → `useAuthMnCallback`.
  */
 export function AuthMnButton({
   authUrl,
@@ -28,6 +30,7 @@ export function AuthMnButton({
   buttonType = "signin",
   label,
   onClick,
+  providers = ["google", "facebook", "steam"],
   theme = "dark",
   size = "md",
   radius = 10,
@@ -39,11 +42,13 @@ export function AuthMnButton({
   useEffect(ensureStyles, []);
 
   const text = label ?? LABELS[buttonType];
+  const showProviders = providers.length > 0 && buttonType !== "plain";
   const cls = [
     "amr-btn",
     `amr-btn--${theme}`,
     `amr-btn--${size}`,
     fullWidth ? "amr-btn--full" : "",
+    showProviders ? "amr-btn--providers" : "",
     className || ""
   ]
     .filter(Boolean)
@@ -59,12 +64,22 @@ export function AuthMnButton({
       onClick={() => (onClick ? onClick() : redirectToAuthMn({ authUrl, redirectUrl }))}
     >
       <span className="amr-btn__logo">
-        <AuthMnLogo size={size === "lg" ? 20 : 18} />
+        <AuthMnLogo
+          size={size === "lg" ? 24 : size === "sm" ? 18 : 22}
+          variant={theme === "light" ? "black" : "outline"}
+        />
       </span>
       {buttonType === "plain" && !label ? (
         <span className="amr-btn__brand">Auth.mn</span>
       ) : (
-        <span>{text}</span>
+        <span className="amr-btn__label">{text}</span>
+      )}
+      {showProviders && (
+        <span className="amr-btn__providers" aria-hidden="true">
+          {providers.map((p) => (
+            <ProviderIcon key={p} name={p} size={size === "lg" ? 16 : 14} />
+          ))}
+        </span>
       )}
     </button>
   );

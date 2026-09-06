@@ -38,6 +38,11 @@ export interface AuthMnButtonProps extends AuthMnBaseButtonProps {
   label?: string;
   /** Өгвөл default redirect-ийн оронд энэ дуудагдана */
   onClick?: () => void;
+  /**
+   * Товчны баруун талд харагдах 3rd party лого — Auth.mn-ээр эдгээрээр нэвтэрч болдгийг ойлгуулна.
+   * Default: ["google","facebook","steam"]. [] өгвөл нуугдана.
+   */
+  providers?: ("google" | "facebook" | "steam" | "apple")[];
 }
 
 export interface AuthMnQrButtonProps extends AuthMnBaseButtonProps {
@@ -55,6 +60,10 @@ export interface AuthMnQrButtonProps extends AuthMnBaseButtonProps {
   onError?: (message: string) => void;
   /** QR-ийн хүчинтэй хугацаа (сек), default 300 */
   expiresIn?: number;
+  /** button: товч → modal; inline: QR-ийг шууд харуулна (дарвал томруулна) */
+  display?: "button" | "inline";
+  /** inline үед QR-ийн хэмжээ px (default 96) */
+  qrSize?: number;
   /** Зөвхөн QR дүрстэй жижиг товч */
   iconOnly?: boolean;
   label?: string;
