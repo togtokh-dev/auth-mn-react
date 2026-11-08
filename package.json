@@ -1,24 +1,40 @@
 {
   "name": "auth-mn-react",
-  "version": "0.2.0",
-  "description": "Auth.mn нэвтрэлтийн товч — Sign in with Auth.mn (redirect + QR/socket) React component",
+  "version": "0.2.1",
+  "description": "Drop-in \"Sign in with Auth.mn\" React component supporting redirect and QR (socket) login, with no CSS-framework dependency.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": { "types": "./dist/index.d.mts", "default": "./dist/index.mjs" },
-      "require": { "types": "./dist/index.d.ts", "default": "./dist/index.js" }
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
     }
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit"
   },
-  "keywords": ["auth.mn", "login", "sso", "qr", "react", "togtokh.dev"],
+  "keywords": [
+    "auth.mn",
+    "login",
+    "sso",
+    "qr",
+    "react",
+    "togtokh.dev"
+  ],
   "author": "TOGTOKH.DEV",
   "license": "ISC",
   "repository": {

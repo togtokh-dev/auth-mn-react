@@ -62,3 +62,25 @@ function LoginPage() {
 - **QR**: socket (`/main/v1/socket/connector`) → `login-qr` → QR → Auth.mn аппаар уншуулж зөвшөөрөх → `login-qr-success` → `onSuccess(token)`.
 
 Token-оо `GET https://api.auth.mn/main/v1/auth/user/verify_token` (Bearer) дуудаж баталгаажуулаад хэрэглэгчийн мэдээллээ авна.
+
+## Exports
+
+Everything below is exported from the package root (`import { ... } from "auth-mn-react"`):
+
+| Export | Kind | Notes |
+|---|---|---|
+| `AuthMnLoginRow` | component | Button + QR in one row (`qrDisplay`: `icon` · `inline` · `button`) |
+| `AuthMnButton` | component | "Sign in with Auth.mn" redirect button |
+| `AuthMnQrButton` | component | QR login via socket (`display`: `button` modal · `inline`) |
+| `useAuthMnCallback(onToken, opts?)` | hook | Reads `?authToken=` on return and cleans the URL |
+| `redirectToAuthMn({ authUrl?, redirectUrl? })` | function | Imperative redirect to the Auth.mn login page |
+| `currentCleanUrl()` | function | Current page URL without query/hash |
+| `AuthMnLogo`, `QrIcon`, `ProviderIcon` | components | SVG icons (brand, QR, 3rd‑party providers) |
+| `DEFAULT_AUTH_URL`, `DEFAULT_API_URL`, `DEFAULT_SOCKET_PATH`, `LABELS` | constants | Defaults used by the components |
+| `AuthMnButtonProps`, `AuthMnQrButtonProps`, `AuthMnLoginRowProps`, `AuthMnBaseButtonProps`, `AuthMnTheme`, `AuthMnSize`, `AuthMnButtonType`, `ProviderName`, `LogoVariant` | types | Exported TypeScript types |
+
+Peer deps: `react` / `react-dom` (>=17). Runtime deps: `react-qr-code`, `socket.io-client`.
+
+## License
+
+ISC © TOGTOKH.DEV
